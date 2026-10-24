@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 5207529523030737819}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116,10 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d876cad7b391de4c8ec992cb06af4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 100
+  data: {fileID: 11400000, guid: ce363dcb6585e8943a270030826b0ff5, type: 2}
   currentHealth: 0
-  damageSound: {fileID: 8300000, guid: b2c37788c434b6c4da0d64852326cf4f, type: 3}
   audioSource: {fileID: 5633028277224071590}
+  damageSound: {fileID: 8300000, guid: b2c37788c434b6c4da0d64852326cf4f, type: 3}
   gameOverSound: {fileID: 8300000, guid: 58af06cb855aacd40ba1d8fd2308ddca, type: 3}
 --- !u!114 &1846311877249759908
 MonoBehaviour:
@@ -133,8 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d32f0e1bdf2ce47a6d3a8045237f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 9
-  jumpForce: 8
+  data: {fileID: 11400000, guid: ce363dcb6585e8943a270030826b0ff5, type: 2}
   groundCheck: {fileID: 5722158729636146352}
   checkRadius: 0.2
   groundLayer:
@@ -157,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340ef149f6b04934b8144d1dcf7ef292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  projectilePrefab: {fileID: 7932222524348236318, guid: 8129459304105834ca294436e05bc7f6, type: 3}
+  data: {fileID: 11400000, guid: ce363dcb6585e8943a270030826b0ff5, type: 2}
   firePoint: {fileID: 5168532613652669189}
 --- !u!95 &4851134314425191874
 Animator:

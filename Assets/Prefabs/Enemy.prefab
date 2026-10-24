@@ -49,10 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63dce0dbc859f534faccfbc96e19aa3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  audioSource: {fileID: 0}
+  data: {fileID: 11400000, guid: 876b6a6d14476a749a1648deba1a8814, type: 2}
+  deathEffectPrefab: {fileID: 8617451154130598678, guid: 96efa59aa50175b4e98bfe6396d120d6, type: 3}
+  audioSource: {fileID: 5813532516460169817}
   damageSound: {fileID: 8300000, guid: b2c37788c434b6c4da0d64852326cf4f, type: 3}
   deathSound: {fileID: 8300000, guid: a98225ad2342b0a438470013bc32d3d7, type: 3}
-  maxHealth: 50
   currentHealth: 0
 --- !u!212 &6708932202852617310
 SpriteRenderer:
