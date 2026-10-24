@@ -332,8 +332,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 229
-        width: 192
-        height: 123
+        width: 64
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,12 +397,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 194
-        y: 225
+        y: 224
         width: 28
         height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 2, w: 2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
@@ -464,8 +464,8 @@ TextureImporter:
         serializedVersion: 2
         x: 288
         y: 231
-        width: 96
-        height: 23
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1822,6 +1822,138 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: 32x32-Tilesheet_68
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 229
+        width: 64
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360d5f2c5008b3f4ba2d778ac795312e
+      internalID: 439074433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 32x32-Tilesheet_69
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 229
+        width: 63
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1ef0244b5a2e847a074aa16a499790
+      internalID: -490570648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 32x32-Tilesheet_70
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 257
+        width: 94
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f21d1aef2ab53b4d817699a1da5b37e
+      internalID: -1041405695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 32x32-Tilesheet_71
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 96
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec1b9097af682b4aa0c8125f4eb9d2d
+      internalID: -1625184043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 32x32-Tilesheet_72
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 231
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e34c228c5939fbf429b5b85c83b156bd
+      internalID: -1519358471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 32x32-Tilesheet_73
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 231
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7d17558b82960744b0d7ec1d1e90a21
+      internalID: -719262303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1903,7 +2035,13 @@ TextureImporter:
       32x32-Tilesheet_65: 5739847675731821512
       32x32-Tilesheet_66: 8569142764308503049
       32x32-Tilesheet_67: 170947038061557242
+      32x32-Tilesheet_68: 439074433
+      32x32-Tilesheet_69: -490570648
       32x32-Tilesheet_7: 7434321578582838890
+      32x32-Tilesheet_70: -1041405695
+      32x32-Tilesheet_71: -1625184043
+      32x32-Tilesheet_72: -1519358471
+      32x32-Tilesheet_73: -719262303
       32x32-Tilesheet_8: 477566060432752925
       32x32-Tilesheet_9: -3809253233554092125
   mipmapLimitGroupName: 
