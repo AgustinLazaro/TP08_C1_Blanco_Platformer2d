@@ -300,7 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 420512596}
   - component: {fileID: 420512595}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MedievalCatle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5299,7 +5299,7 @@ GameObject:
   - component: {fileID: 1715882767}
   - component: {fileID: 1715882769}
   - component: {fileID: 1715882768}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Snow_Weather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11403,10 +11403,6 @@ PrefabInstance:
     - target: {fileID: 1673365601881517540, guid: edc40cc89f831aa498ed6750e0de1df7, type: 3}
       propertyPath: m_Name
       value: CanvasGameplayMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003969951890727566, guid: edc40cc89f831aa498ed6750e0de1df7, type: 3}
-      propertyPath: _speedText
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7984164537565806834, guid: edc40cc89f831aa498ed6750e0de1df7, type: 3}
       propertyPath: m_Pivot.x
