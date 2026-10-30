@@ -626,6 +626,10 @@ PrefabInstance:
       propertyPath: meleeCooldownText
       value: 
       objectReference: {fileID: 1350821920}
+    - target: {fileID: 5178359951129950835, guid: 860e6b4e90238914e832d7a6a99cec27, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8828096402174241058, guid: 860e6b4e90238914e832d7a6a99cec27, type: 3}
       propertyPath: m_Name
       value: Player
