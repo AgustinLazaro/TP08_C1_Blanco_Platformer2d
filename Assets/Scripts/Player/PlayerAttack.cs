@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -14,6 +15,11 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] private Transform firePoint;
+    [SerializeField] private float attackCooldown = 0.5f;
+    private float nextAttackTime = 0f;
+
+    [Header("UI Feedback")]
+    [SerializeField] private TextMeshProUGUI meleeCooldownText;
     #endregion
 
     #region Unity Lifecycle
@@ -26,15 +32,17 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         HandleAttackInput();
+        UpdateCooldownUI();
     }
     #endregion
 
     #region Input & Logic Methods
     private void HandleAttackInput()
     {
-        if (Input.GetMouseButtonDown(0) && playerMovement.IsGrounded)
+        if (Input.GetMouseButtonDown(0) && playerMovement.IsGrounded && Time.time >= nextAttackTime)
         {
             ExecuteAttack();
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 
@@ -54,8 +62,22 @@ public class PlayerAttack : MonoBehaviour
         if (transform.localScale.x < 0)
         {
             Vector3 projectileScale = projectile.transform.localScale;
-            projectileScale.x = projectileScale.x * -1;
+            projectileScale.x *= -1;
             projectile.transform.localScale = projectileScale;
+        }
+    }
+
+    private void UpdateCooldownUI()
+    {
+        float remainingTime = nextAttackTime - Time.time;
+
+        if (remainingTime > 0f)
+        {
+            meleeCooldownText.text = remainingTime.ToString("F1") + "s";
+        }
+        else
+        {
+            meleeCooldownText.text = "READY";
         }
     }
     #endregion
