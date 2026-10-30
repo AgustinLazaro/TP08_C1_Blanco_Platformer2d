@@ -5438,7 +5438,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 4c545c9634e338a40bd610d579fc1c22, type: 2}
   floatSpeed: 3
   floatAmplitude: 0.2
-  animator: {fileID: 0}
 --- !u!58 &1394378415
 CircleCollider2D:
   m_ObjectHideFlags: 0
