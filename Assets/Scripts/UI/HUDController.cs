@@ -6,8 +6,13 @@ public class HUDController : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _speedText;
     [SerializeField] private Slider _healthSlider;
+
+    [Header("Coins UI")]
+    [SerializeField] private TextMeshProUGUI _coinsText;
+
+    [Header("Attack Cooldown UI")]
+    [SerializeField] private TextMeshProUGUI _meleeCooldownText;
 
     private int _lastDisplayedSpeed = -1;
 
@@ -18,37 +23,28 @@ public class HUDController : MonoBehaviour
 
     private void OnDisable()
     {
-        
         // PlayerHealth.OnHealthChanged -= UpdateHealthBar;
     }
 
-    private void Update()
+    public void UpdateCoinsDisplay(int totalCoins)
     {
-       
-        // UpdateScoreDisplay();
-        // UpdateSpeedDisplay();
+        _coinsText.text = $"Coins: {totalCoins}";
     }
 
-    /*
-    private void UpdateScoreDisplay()
+    public void UpdateCooldownDisplay(float remainingTime)
     {
-        _scoreText.text = GameManager.Instance.CurrentScore.ToString("0");
-    }
-
-    private void UpdateSpeedDisplay()
-    {
-        int speedInt = Mathf.FloorToInt(GameManager.Instance.CurrentSpeed);
-
-        if (speedInt != _lastDisplayedSpeed)
+        if (remainingTime > 0f)
         {
-            _lastDisplayedSpeed = speedInt;
-            _speedText.text = $"speed = {speedInt}x";
+            _meleeCooldownText.text = remainingTime.ToString("F1") + "s";
+        }
+        else
+        {
+            _meleeCooldownText.text = "READY";
         }
     }
-    */
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)
-    { 
+    {
         _healthSlider.maxValue = maxHealth;
         _healthSlider.value = currentHealth;
     }

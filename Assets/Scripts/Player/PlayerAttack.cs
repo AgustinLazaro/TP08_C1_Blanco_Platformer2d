@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -18,8 +17,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackCooldown = 0.5f;
     private float nextAttackTime = 0f;
 
-    [Header("UI Feedback")]
-    [SerializeField] private TextMeshProUGUI meleeCooldownText;
+    [Header("UI Communication")]
+    [SerializeField] private HUDController hudController;
     #endregion
 
     #region Unity Lifecycle
@@ -69,16 +68,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void UpdateCooldownUI()
     {
-        float remainingTime = nextAttackTime - Time.time;
+        if (hudController == null) return;
 
-        if (remainingTime > 0f)
-        {
-            meleeCooldownText.text = remainingTime.ToString("F1") + "s";
-        }
-        else
-        {
-            meleeCooldownText.text = "READY";
-        }
+        float remainingTime = nextAttackTime - Time.time;
+        hudController.UpdateCooldownDisplay(remainingTime);
     }
     #endregion
 }
