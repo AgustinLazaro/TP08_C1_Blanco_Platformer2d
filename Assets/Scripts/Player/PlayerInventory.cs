@@ -1,24 +1,52 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [Header("UI Reference")]
     [SerializeField] private HUDController hudController;
 
-    private const string CoinsPrefKey = "TotalCoins";
+    [Header("Coin Settings")]
+    [SerializeField] private int maxCoins = 9;
+
+    private string levelCoinsKey;
     private int currentCoins;
+
+    private void Awake()
+    {
+        levelCoinsKey = $"Coins_{SceneManager.GetActiveScene().name}";
+    }
 
     private void Start()
     {
-        currentCoins = PlayerPrefs.GetInt(CoinsPrefKey, 0);
-        hudController.UpdateCoinsDisplay(currentCoins);
+        currentCoins = Mathf.Clamp(PlayerPrefs.GetInt(levelCoinsKey, 0), 0, maxCoins);
+        UpdateCoinsUI();
     }
 
     public void AddCoins(int amount)
     {
-        currentCoins += amount;
+        if (currentCoins >= maxCoins) return;
 
-        PlayerPrefs.SetInt(CoinsPrefKey, currentCoins);
+        currentCoins = Mathf.Clamp(currentCoins + amount, 0, maxCoins);
+
+        PlayerPrefs.SetInt(levelCoinsKey, currentCoins);
         PlayerPrefs.Save();
-        hudController.UpdateCoinsDisplay(currentCoins);
+
+        UpdateCoinsUI();
+
+        if (currentCoins >= maxCoins)
+        {
+            OnCoinsGoalReached();
+        }
+    }
+
+    private void UpdateCoinsUI()
+    { 
+        hudController.UpdateCoinsDisplay(currentCoins, maxCoins);
+    }
+
+    private void OnCoinsGoalReached()
+    {
+        Debug.Log($"Total de monedas recolectadas");
     }
 }

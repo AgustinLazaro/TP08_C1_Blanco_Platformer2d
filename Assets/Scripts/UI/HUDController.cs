@@ -26,9 +26,9 @@ public class HUDController : MonoBehaviour
         // PlayerHealth.OnHealthChanged -= UpdateHealthBar;
     }
 
-    public void UpdateCoinsDisplay(int totalCoins)
+    public void UpdateCoinsDisplay(int totalCoins, int maxCoins)
     {
-        _coinsText.text = $"Coins: {totalCoins}";
+        _coinsText.text = $"Coins: {totalCoins}/{maxCoins}";
     }
 
     public void UpdateCooldownDisplay(float remainingTime)
