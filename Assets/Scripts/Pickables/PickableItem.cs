@@ -24,10 +24,10 @@ public class PickableItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.TryGetComponent<PlayerMovement>(out PlayerMovement player)) return;
+        if (!collision.TryGetComponent<PlayerInventory>(out PlayerInventory inventory)) return;
 
+        inventory.AddCoins(1);
         Debug.Log($"Collected: {data.name}");
-
         Destroy(gameObject);
     }
 }
