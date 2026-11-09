@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerHealth : MonoBehaviour
 {
+    #region Variables
     [Header("Components")]
     private HUDController hud;
     private Animator anim;
@@ -21,12 +22,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] private AudioClip healSound;
 
     private float hitInvulnerableUntil;
     private bool isDead;
 
     public bool IsInvulnerable => Time.time < hitInvulnerableUntil;
+    #endregion
 
+    #region Unity Lifecycle
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -41,9 +45,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        // Debug para probar daño con la tecla T
         if (Input.GetKeyDown(KeyCode.T)) TakeDamage(20f);
     }
+    #endregion
 
     #region Public Methods
     public void TakeDamage(float damageAmount)
@@ -65,6 +69,15 @@ public class PlayerHealth : MonoBehaviour
             anim.SetTrigger("Hit");
             if (audioSource && damageSound) audioSource.PlayOneShot(damageSound);
         }
+    }
+
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+
+        currentHealth = Mathf.Min(currentHealth + amount, data.maxHealth);
+        if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
+        if (healSound != null && audioSource != null) audioSource.PlayOneShot(healSound);
     }
     #endregion
 

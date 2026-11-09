@@ -1,9 +1,11 @@
 using UnityEngine;
 
+// Clase BASE de los pickables (Clase 11: herencia, virtual / override).
+// Por defecto se comporta como Reward (moneda). Las hijas cambian OnCollected.
 [RequireComponent(typeof(Collider2D))]
 public class PickableItem : MonoBehaviour
 {
-    [SerializeField] private PickableDataSO data;
+    [SerializeField] protected PickableDataSO data;
 
     [Header("Float Settings")]
     [SerializeField] private float floatSpeed = 3f;
@@ -24,10 +26,20 @@ public class PickableItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.TryGetComponent<PlayerInventory>(out PlayerInventory inventory)) return;
+        if (!collision.TryGetComponent<PlayerHealth>(out PlayerHealth _)) return;
 
-        inventory.AddCoins(1);
-        Debug.Log($"Collected: {data.name}");
-        Destroy(gameObject);
+        if (OnCollected(collision.gameObject))
+            Destroy(gameObject);
+    }
+
+    // Devuelve true si el item se consumio
+    protected virtual bool OnCollected(GameObject player)
+    {
+        if (player.TryGetComponent<PlayerInventory>(out PlayerInventory inventory))
+        {
+            inventory.AddCoins(data.coinAmount);
+            return true;
+        }
+        return false;
     }
 }
