@@ -13,6 +13,9 @@ public class EnemyHealth : MonoBehaviour
     [Header("Effects")]
     [SerializeField] private GameObject deathEffectPrefab;
 
+    [Header("UI")]
+    [SerializeField] private EnemyHealthBar healthBar;
+
     [Header("Audio Settings")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip damageSound;
@@ -32,12 +35,13 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = data.maxHealth;
+        if (healthBar != null) healthBar.SetFill(1f);
     }
 
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
-        Debug.Log("Vida enemy: " + currentHealth);
+        if (healthBar != null) healthBar.SetFill(currentHealth / data.maxHealth);
 
         if (currentHealth > 0)
         {
@@ -47,6 +51,7 @@ public class EnemyHealth : MonoBehaviour
         else
         {
             col.enabled = false;
+            if (healthBar != null) healthBar.Hide();
 
             anim.SetTrigger("Hit");
             audioSource.PlayOneShot(deathSound);

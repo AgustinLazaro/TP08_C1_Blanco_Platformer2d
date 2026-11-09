@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerHealth : MonoBehaviour
 {
-    #region Variables
     [Header("Components")]
     private HUDController hud;
     private Animator anim;
@@ -14,14 +14,19 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Health Settings")]
     [SerializeField] private float currentHealth;
+    [SerializeField] private float hitInvulnerability = 0.6f;
+    [SerializeField] private float restartDelay = 2f;
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip gameOverSound;
-    #endregion
 
-    #region Unity Lifecycle
+    private float hitInvulnerableUntil;
+    private bool isDead;
+
+    public bool IsInvulnerable => Time.time < hitInvulnerableUntil;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -31,41 +36,55 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = data.maxHealth;
         hud = FindFirstObjectByType<HUDController>();
-        hud.UpdateHealthBar(currentHealth, data.maxHealth);
+        if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
     }
 
     private void Update()
     {
-        HandleDebugInput();
-    }
-    #endregion
-
-    #region Input & Logic Methods
-    private void HandleDebugInput()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TakeDamage(20f);
-        }
+        // Debug para probar daño con la tecla T
+        if (Input.GetKeyDown(KeyCode.T)) TakeDamage(20f);
     }
 
-    private void TakeDamage(float damageAmount)
+    #region Public Methods
+    public void TakeDamage(float damageAmount)
     {
+        if (isDead || IsInvulnerable) return;
+
         currentHealth -= damageAmount;
-        hud.UpdateHealthBar(currentHealth, data.maxHealth);
+        hitInvulnerableUntil = Time.time + hitInvulnerability;
+
+        if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            audioSource.PlayOneShot(gameOverSound);
-            anim.SetTrigger("Die");
-            Debug.Log("Game over");
+            Die();
         }
         else
         {
-            audioSource.PlayOneShot(damageSound);
             anim.SetTrigger("Hit");
+            if (audioSource && damageSound) audioSource.PlayOneShot(damageSound);
         }
+    }
+    #endregion
+
+    #region Private Methods
+    private void Die()
+    {
+        isDead = true;
+
+        if (audioSource && gameOverSound) audioSource.PlayOneShot(gameOverSound);
+        anim.SetTrigger("Die");
+
+        GetComponent<PlayerMovement>().enabled = false;
+        if (TryGetComponent<PlayerAttack>(out PlayerAttack attack)) attack.enabled = false;
+
+        Invoke(nameof(RestartLevel), restartDelay);
+    }
+
+    private void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     #endregion
 }
