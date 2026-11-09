@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Components")]
     private HUDController hud;
     private Animator anim;
+    private SpriteRenderer sprite;
 
     [Header("Data Configuration")]
     [SerializeField] private PlayerDataSO data;
@@ -25,15 +27,18 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioClip healSound;
 
     private float hitInvulnerableUntil;
+    private bool pickupInvulnerable;
+    private Coroutine invulnerabilityRoutine;
     private bool isDead;
 
-    public bool IsInvulnerable => Time.time < hitInvulnerableUntil;
+    public bool IsInvulnerable => pickupInvulnerable || Time.time < hitInvulnerableUntil;
     #endregion
 
     #region Unity Lifecycle
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
@@ -79,9 +84,27 @@ public class PlayerHealth : MonoBehaviour
         if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
         if (healSound != null && audioSource != null) audioSource.PlayOneShot(healSound);
     }
+
+    public void ActivateInvulnerability(float seconds)
+    {
+        if (invulnerabilityRoutine != null) StopCoroutine(invulnerabilityRoutine);
+        invulnerabilityRoutine = StartCoroutine(InvulnerabilityRoutine(seconds));
+    }
     #endregion
 
     #region Private Methods
+    private IEnumerator InvulnerabilityRoutine(float seconds)
+    {
+        pickupInvulnerable = true;
+        if (sprite != null) sprite.color = Color.yellow;
+
+        yield return new WaitForSeconds(seconds);
+
+        pickupInvulnerable = false;
+        if (sprite != null) sprite.color = Color.white;
+        invulnerabilityRoutine = null;
+    }
+
     private void Die()
     {
         isDead = true;
