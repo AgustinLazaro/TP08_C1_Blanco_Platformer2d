@@ -45,12 +45,12 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = data.maxHealth;
         hud = FindFirstObjectByType<HUDController>();
-        if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
+        hud.UpdateHealthBar(currentHealth, data.maxHealth);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) TakeDamage(20f);
+        if (Input.GetKeyDown(KeyCode.T)) TakeDamage(20f); // debug
     }
     #endregion
 
@@ -61,8 +61,7 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damageAmount;
         hitInvulnerableUntil = Time.time + hitInvulnerability;
-
-        if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
+        hud.UpdateHealthBar(currentHealth, data.maxHealth);
 
         if (currentHealth <= 0)
         {
@@ -71,8 +70,8 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(damageSound);
             anim.SetTrigger("Hit");
-            if (audioSource && damageSound) audioSource.PlayOneShot(damageSound);
         }
     }
 
@@ -81,8 +80,8 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
 
         currentHealth = Mathf.Min(currentHealth + amount, data.maxHealth);
-        if (hud != null) hud.UpdateHealthBar(currentHealth, data.maxHealth);
-        if (healSound != null && audioSource != null) audioSource.PlayOneShot(healSound);
+        hud.UpdateHealthBar(currentHealth, data.maxHealth);
+        if (healSound != null) audioSource.PlayOneShot(healSound);
     }
 
     public void ActivateInvulnerability(float seconds)
@@ -108,8 +107,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         isDead = true;
-
-        if (audioSource && gameOverSound) audioSource.PlayOneShot(gameOverSound);
+        audioSource.PlayOneShot(gameOverSound);
         anim.SetTrigger("Die");
 
         GetComponent<PlayerMovement>().enabled = false;
