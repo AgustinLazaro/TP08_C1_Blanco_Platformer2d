@@ -17,6 +17,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackCooldown = 0.5f;
     private float nextAttackTime = 0f;
 
+    // Multiplicador de dano (lo sube el pickable Damage)
+    public static float DamageMultiplier = 1f;
+
     [Header("UI Communication")]
     [SerializeField] private HUDController hudController;
     #endregion
@@ -26,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        DamageMultiplier = 1f;
     }
 
     private void Update()
